@@ -36,5 +36,21 @@ public class MainController {
 		model.addAttribute("nombre", name);
 		return "index";
 	}
+	
+	@GetMapping("/saludo")
+	public String welcome5(@RequestParam(name="name", defaultValue= "Nombre") String name, @RequestParam(name="last", defaultValue= "Apellido") String last, Model model) {
+		model.addAttribute("nombre", name + " " + last);
+		// Podemos pasar los atributos por separado
+		model.addAttribute("name", name);
+		model.addAttribute("last", last);
+		return "index";
+	}
+	
+	@GetMapping("/saludo/{name}/{last}")
+	public String welcome6(@PathVariable String name, @PathVariable String last, Model model) {
+		//model.addAttribute("saludo", "Hola, " + name);
+		model.addAttribute("nombre", name + " " + last);
+		return "index";
+	}
 
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Formulario de Empleados</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/css/starter-template.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">rlibanez</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link active"aria-current="page" href="/empleado/new">Nuevo empleado</a></li>
+				</ul>
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Buscar</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<br><br><br><br>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<form method="post" action="#" th:action="@{/empleado/new/submit}" th:object="${empleadoForm}">
+					<h1>Nuevo empleado</h1>
+					
+					<div class="mb-3">
+						<label for="id" class="form-label">ID</label> 
+						<input type="text" class="form-control" id="id" placeholder="ID" th:field="*{id}">
+					</div>
+					
+					<div class="mb-3">
+						<label for="nombre" class="form-label">Nombre</label> 
+						<input type="text" class="form-control" id="nombre" placeholder="Nombre" th:field="*{nombre}">
+					</div>
+					
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label> 
+						<input type="email" class="form-control" id="email" placeholder="empleado@gmail.com" th:field="*{email}">
+					</div>
+					
+					<div class="mb-3">
+						<label for="telefono" class="form-label">Teléfono</label> 
+						<input type="tel" class="form-control" id="telefono" placeholder="987654321" th:field="*{telefono}">
+
+					</div>
+					
+					<div class="d-grid gap-2 d-md-block mb-5">
+						<button type="submit" class="btn btn-dark">Enviar</button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

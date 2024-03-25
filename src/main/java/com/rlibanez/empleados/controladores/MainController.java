@@ -24,7 +24,7 @@ public class MainController {
 //	}
 	
 	// Saludo personalizado con Java
-	@GetMapping("/")
+	@GetMapping("/hi")
 	public String welcome3(@RequestParam("name") Optional<String> name, Model model) {
 		model.addAttribute("nombre", name.orElse("Mundo"));
 		return "index";

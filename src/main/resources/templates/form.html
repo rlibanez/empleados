@@ -47,7 +47,7 @@
 
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
-				<form class="needs-validation" method="post" action="#"
+				<form class="needs-validation" method="post" enctype="multipart/form-data" action="#"
 					th:action="${empleadoForm.id > 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
 					th:object="${empleadoForm}">
 					
@@ -83,8 +83,13 @@
 					
 					<div class="mb-3">
 						<label for="telefono" class="form-label">Teléfono</label> 
-						<input type="tel" class="form-control" id="telefono" placeholder="987654321" th:field="*{telefono}">
+						<input type="tel" class="form-control input-file" id="telefono" placeholder="987654321" th:field="*{telefono}">
 
+					</div>
+					
+					<div class="mb-3">
+						<label for="file" class="form-label">Avatar</label> 
+						<input id="file" name="file" class="form-control input-file" type="file">
 					</div>
 					
 					<div class="d-grid gap-2 d-md-block mb-5">

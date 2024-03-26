@@ -13,6 +13,7 @@ public class Empleado {
 	@Email
 	private String email;
 	private String telefono;
+	private String imagen;
 
 	public Empleado() {
 	}
@@ -22,6 +23,14 @@ public class Empleado {
 		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
+	}
+
+	public Empleado(long id, String nombre, String email, String telefono, String imagen) {
+		this.id = id;
+		this.nombre = nombre;
+		this.email = email;
+		this.telefono = telefono;
+		this.imagen = imagen;
 	}
 
 	public long getId() {
@@ -56,9 +65,17 @@ public class Empleado {
 		this.telefono = telefono;
 	}
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, nombre, telefono);
+		return Objects.hash(email, id, imagen, nombre, telefono);
 	}
 
 	@Override
@@ -70,13 +87,13 @@ public class Empleado {
 		if (getClass() != obj.getClass())
 			return false;
 		Empleado other = (Empleado) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(telefono, other.telefono);
+		return Objects.equals(email, other.email) && id == other.id && Objects.equals(imagen, other.imagen)
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
 	}
 
 	@Override
 	public String toString() {
-		return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono + "]";
+		return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono + ", imagen="
+				+ imagen + "]";
 	}
-
 }

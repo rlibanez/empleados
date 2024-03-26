@@ -53,9 +53,9 @@ public class EmpleadoService {
 	@PostConstruct
 	public void init() {
 		empleadoRepository
-				.addAll(Arrays.asList(new Empleado(1, "Antonio García", "antonio.garcia@openwebinars.net", "942334421"),
-						new Empleado(2, "María López", "maria.lopez@openwebinars.net", "916547890"),
-						new Empleado(3, "Ángel Antúnez", "angel.antunez@openwebinars.net", "948997755")));
+				.addAll(Arrays.asList(new Empleado(1, "Antonio García", "antonio.garcia@gmail.com", "942334421"),
+						new Empleado(2, "María López", "maria.lopez@yahoo.es", "916547890"),
+						new Empleado(3, "Ángel Antúnez", "angel.antunez@asdf.org", "948997755")));
 	}
 
 }

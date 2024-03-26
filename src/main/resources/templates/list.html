@@ -50,6 +50,7 @@
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>Avatar</th>
 						<th>Nombre</th>
 						<th>Email</th>
 						<th>Teléfono</th>
@@ -58,6 +59,7 @@
 				<tbody>
 					<tr th:each="empleado : ${listaEmpleados}">
 						<td th:text="${empleado.id}">ID</td>
+						<td><img src="" th:src="@{${empleado.imagen} ?: 'https://api.dicebear.com/8.x/pixel-art/png?seed={email}'(email=${empleado.email})}" width="48px"/></td>
 						<td th:text="${empleado.nombre}">Pepe Pérez</td>
 						<td th:text="${empleado.email}">empleado@gmail.com</td>
 						<td th:text="${empleado.telefono}">987654321</td>

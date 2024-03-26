@@ -71,11 +71,14 @@ public class EmpleadoController {
 	}
 
 	@PostMapping("/empleado/edit/submit")
-	public String editEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado empleado,
-			BindingResult bindingResult) {
+	public String editEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado empleado, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 		if (bindingResult.hasErrors()) {
 			return "form";
 		} else {
+			if (!file.isEmpty()) {
+				String avatar = storageService.store(file, empleado.getId());
+				empleado.setImagen(MvcUriComponentsBuilder.fromMethodName(EmpleadoController.class, "serveFile", avatar).build().toUriString());
+			}
 			empleadoService.editEmpleado(empleado);
 			return "redirect:/empleado/list";
 		}
@@ -90,8 +93,8 @@ public class EmpleadoController {
 		if (file == null)
 			return ResponseEntity.notFound().build();
 
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-		//return ResponseEntity.ok().body(file);
+		//return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+		return ResponseEntity.ok().body(file);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.rlibanez.empleados.modelos;
 
 import java.util.Objects;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;

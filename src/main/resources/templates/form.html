@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,71 +32,96 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link active"aria-current="page" href="/empleado/new">Nuevo empleado</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/empleado/new">Nuevo empleado</a></li>
 				</ul>
+
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" data-bs-display="static"
+						aria-expanded="false">
+						<span th:text="${#authentication.name}">Menú</span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-lg-end">
+						<li><a class="dropdown-item"
+							href="javascript:document.getElementById('logoutForm').submit()">Salir</a></li>
+						<li><button class="dropdown-item" type="button">Something
+								else</button></li>
+					</ul>
+				</div>
+
 				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<input class="form-control me-2" type="search" placeholder="Search"
+						aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Buscar</button>
 				</form>
 			</div>
 		</div>
 	</nav>
 
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+
 	<div class="container">
 
-		<br><br><br><br>
+		<br> <br> <br> <br>
 
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
-				<form class="needs-validation" method="post" enctype="multipart/form-data" action="#"
+				<form class="needs-validation" method="post"
+					enctype="multipart/form-data" action="#"
 					th:action="${empleadoForm.id > 0} ? @{/empleado/edit/submit} : @{/empleado/new/submit}"
 					th:object="${empleadoForm}">
-					
-					<h1 th:text="${empleadoForm.id > 0} ? 'Editar empleado ' + ${empleadoForm.id} : 'Nuevo empleado'">Nuevo empleado</h1>
+
+					<h1
+						th:text="${empleadoForm.id > 0} ? 'Editar empleado ' + ${empleadoForm.id} : 'Nuevo empleado'">Nuevo
+						empleado</h1>
 
 					<div class="mb-3">
-						<label for="id" class="form-label">ID</label> 
-						<input type="text" class="form-control" id="id" placeholder="666" 
-							th:field="*{id}"
+						<label for="id" class="form-label">ID</label> <input type="text"
+							class="form-control" id="id" placeholder="666" th:field="*{id}"
 							th:attrappend="readonly=${empleadoForm.id > 0} ? 'readonly' : null"
 							th:classappend="${#fields.hasErrors('id')} ? 'is-invalid'"
 							aria-describedby="validationIdFeedback" required>
-						<div id="validationIdFeedback" class="invalid-feedback">Error ID</div>
+						<div id="validationIdFeedback" class="invalid-feedback">Error
+							ID</div>
 						<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
 							class="help-block" id="id-error">Errores</span>
 					</div>
 
 					<div class="mb-3">
-						<label for="nombre" class="form-label">Nombre</label> 
-						<input type="text" class="form-control" id="nombre" placeholder="Nombre" 
+						<label for="nombre" class="form-label">Nombre</label> <input
+							type="text" class="form-control" id="nombre" placeholder="Nombre"
 							th:field="*{nombre}"
 							th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'"
 							aria-describedby="validationNombreFeedback">
-						<div id="validationNombreFeedback" class="invalid-feedback">Error nombre</div>	
+						<div id="validationNombreFeedback" class="invalid-feedback">Error
+							nombre</div>
 						<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
 							class="help-block" id="nombre-error">Errores</span>
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="email" class="form-label">Email</label> 
-						<input type="email" class="form-control" id="email" placeholder="empleado@gmail.com" th:field="*{email}">
+						<label for="email" class="form-label">Email</label> <input
+							type="email" class="form-control" id="email"
+							placeholder="empleado@gmail.com" th:field="*{email}">
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="telefono" class="form-label">Teléfono</label> 
-						<input type="tel" class="form-control input-file" id="telefono" placeholder="987654321" th:field="*{telefono}">
+						<label for="telefono" class="form-label">Teléfono</label> <input
+							type="tel" class="form-control input-file" id="telefono"
+							placeholder="987654321" th:field="*{telefono}">
 
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="file" class="form-label">Avatar</label> 
-						<input id="file" name="file" class="form-control input-file" type="file">
+						<label for="file" class="form-label">Avatar</label> <input
+							id="file" name="file" class="form-control input-file" type="file">
 					</div>
-					
+
 					<div class="d-grid gap-2 d-md-block mb-5">
 						<button type="submit" class="btn btn-dark">Enviar</button>
 					</div>
-					
+
 				</form>
 			</div>
 		</div>
@@ -106,6 +132,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<!-- 	<script src="/js/formvalidation.js"></script> -->
+	<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- 	<script src="/js/formvalidation.js"></script> -->
 </body>
 </html>

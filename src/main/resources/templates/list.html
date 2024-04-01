@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,20 +31,42 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" href="/empleado/new">Nuevo empleado</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="/empleado/new">Nuevo
+							empleado</a></li>
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Buscar</button>
-				</form>
+
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" data-bs-display="static"
+						aria-expanded="false">
+						<span sec:authentication="name">Menú</span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-lg-end">
+						<li><a class="dropdown-item"
+							href="javascript:document.getElementById('logoutForm').submit()">Salir</a></li>
+						<li><button class="dropdown-item" type="button">Something
+								else</button></li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
 	</nav>
 
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+
 	<div class="container">
 		<div class="starter-template">
 			<br> <br> <br> <br>
+
+			<!-- 			<div sec:authorize="hasRole('USER')">Text visible to user.</div> -->
+			<!-- 			<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div> -->
+			<!-- 			<div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div> -->
+			<!-- 			<div sec:authorize="isAuthenticated()"> Authenticated as <span sec:authentication="name"></span></div> -->
+			<!-- 			<div th:text="${#authentication.name}">The value of the "name" property of the authentication object should appear here.</div> -->
+
 			<h1 class="text-center">Listado de empleados de la empresa</h1>
 			<br> <br>
 			<table class="table">
@@ -54,12 +77,14 @@
 						<th>Nombre</th>
 						<th>Email</th>
 						<th>Teléfono</th>
-        				<th>Operaciones</th>
+						<th>Operaciones</th>
 				</thead>
 				<tbody>
 					<tr th:each="empleado : ${listaEmpleados}">
 						<td th:text="${empleado.id}">ID</td>
-						<td><img src="" th:src="@{${empleado.imagen} ?: 'https://api.dicebear.com/8.x/pixel-art/png?seed={email}'(email=${empleado.email})}" width="48px"/></td>
+						<td><img src=""
+							th:src="@{${empleado.imagen} ?: 'https://api.dicebear.com/8.x/pixel-art/png?seed={email}'(email=${empleado.email})}"
+							width="48px" /></td>
 						<td th:text="${empleado.nombre}">Pepe Pérez</td>
 						<td th:text="${empleado.email}">empleado@gmail.com</td>
 						<td th:text="${empleado.telefono}">987654321</td>
@@ -75,5 +100,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
